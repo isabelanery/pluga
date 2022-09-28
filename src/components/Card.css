@@ -1,0 +1,23 @@
+.card-app {
+  margin: 1rem;
+  padding: 2rem;
+  width: 160px;
+}
+
+.card-app:hover {
+  background-color: rgb(226, 226, 226);
+}
+
+.card-app p {
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px white;
+}
+
+.card-app img {
+  max-width: 100px;
+  border-radius: 2rem;
+}
+/*
+.bg-color {
+  ;
+} */
