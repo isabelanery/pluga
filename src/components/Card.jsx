@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Card.css';
 import Modal from './Modal';
 
 function Card(props) {
   const { data } = props;
-  const { app_id, name, icon, color } = data;
+  const { name, icon, color } = data;
+  const [modalState, setModalState] = useState(false);
 
   return (
     <>
       <div
         className="card-app"
-        data-bs-toggle="modal"
-        data-bs-target={`#modal-${app_id}`}
+        onClick={ () => setModalState(true)  }
       >
         <p>{ name }</p>
 
         <img src={ icon } alt={ name } style={ { "backgroundColor": color } } />
 
       </div>
-      <Modal data={ data } />
+      <Modal data={ data } isOpen={ modalState } updateModal={ setModalState } />
     </>
   );
 }
