@@ -1,4 +1,7 @@
-.list-container {
+.list-wrapper {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem;
 }
