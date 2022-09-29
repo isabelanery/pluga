@@ -38,6 +38,7 @@ function List() {
 
       <button
         type="button"
+        className="btn"
         onClick={ nextPage }
       >
         { '>' }
