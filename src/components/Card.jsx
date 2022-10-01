@@ -4,7 +4,7 @@ import './Card.css';
 
 function Card(props) {
   const { data } = props;
-  const { app_id: id, name, icon, color } = data;
+  const { name, icon, color } = data;
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -12,17 +12,21 @@ function Card(props) {
   const openModal = () => {
     const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
 
-    if (!lastOpened) localStorage.setItem('lastOpened', JSON.stringify([data]));
+    if (!lastOpened) {
+      localStorage.setItem('lastOpened', JSON.stringify([data]))
+      setIsOpen(true);
+      return null;
+    };
 
-    if (lastOpened.find((app) => app.name === name)) return null;
+    const removeDuplicate = lastOpened.filter((item) => item.name !== name);
 
-    lastOpened.unshift(data);
+    removeDuplicate.unshift(data);
 
-    if (lastOpened.length > 3) lastOpened.pop();
+    if (removeDuplicate.length > 3) removeDuplicate.pop();
 
-    localStorage.setItem('lastOpened', JSON.stringify(lastOpened));
+    localStorage.setItem('lastOpened', JSON.stringify(removeDuplicate));
 
-    console.log(lastOpened);
+    console.log(removeDuplicate);
     setIsOpen(true);
   }
 
@@ -36,7 +40,7 @@ function Card(props) {
 
       </div>
 
-      <Modal key={ `modal-${id}` } data={ data } isOpen={ isOpen } closeModal={ closeModal }  />
+      <Modal data={ data } isOpen={ isOpen } closeModal={ closeModal }  />
     </>
   );
 }

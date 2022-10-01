@@ -12,7 +12,7 @@ export default function Modal(props) {
     const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
 
     setList(lastOpened);
-  }, []);
+  }, [isOpen]);
 
 
   return (
