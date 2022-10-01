@@ -1,14 +1,19 @@
 .card-app {
-  margin: 1rem;
-  padding: 2rem;
-  width: 160px;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  margin: 1rem;
+  margin-top: 0;
+  min-height: 100%;
+  padding: 1.5rem;
+  width: 160px;
 }
 
 .card-app:hover {
-  background-color: rgba(225, 225, 225, 0.842);;
+  background-color: rgba(225, 225, 225, 0.842);
   border-radius: 1.8rem;
+  /* min-height: 100px; */
 }
 
 .card-app p {
@@ -20,4 +25,20 @@
   max-width: 100px;
   border-radius: 1.8rem;
   padding: 1rem;
+}
+
+.small {
+  margin: 1rem;
+  padding: 0.8rem;
+  min-height: 100px;
+  width: 100px;
+}
+
+.small img {
+  border-radius: 1.5rem;
+}
+
+.small p {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }
