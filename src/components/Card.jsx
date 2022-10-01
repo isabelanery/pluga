@@ -19,14 +19,11 @@ function Card(props) {
     };
 
     const removeDuplicate = lastOpened.filter((item) => item.name !== name);
-
     removeDuplicate.unshift(data);
 
-    if (removeDuplicate.length > 3) removeDuplicate.pop();
+    if (removeDuplicate.length > 4) removeDuplicate.pop();
 
     localStorage.setItem('lastOpened', JSON.stringify(removeDuplicate));
-
-    console.log(removeDuplicate);
     setIsOpen(true);
   }
 
