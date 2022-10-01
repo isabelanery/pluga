@@ -9,7 +9,6 @@ function List() {
 
   const getList = async () => {
     const { data } = await axios.get('https://pluga.co/ferramentas_search.json');
-
     setApps(data);
   }
 
