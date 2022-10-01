@@ -8,11 +8,8 @@ export default function Modal(props) {
 
   const [list, setList] = useState([]);
 
-  const removeClickedApp = list.filter((app) => app.link !== link);
-
   useEffect(() => {
     const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
-
     setList(lastOpened);
   }, [isOpen]);
 
@@ -33,11 +30,18 @@ export default function Modal(props) {
 
           </div>
 
-          <div className="last-viewed">
+          <div className="last-opened-container">
             Últimas ferramentas visualizadas
-            {
-              isOpen && removeClickedApp.map((app, index) => <Card data={ app } key={ `last-opened-${index + 1}` } />)
-            }
+            <div className="last-opened">
+              {
+                isOpen && list.map((app, index) => (
+                  <Card
+                    small
+                    data={ app }
+                    key={ `last-opened-${index + 1}` }
+                  />))
+              }
+            </div>
           </div>
       </div>
     </div>

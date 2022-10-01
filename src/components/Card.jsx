@@ -3,7 +3,7 @@ import Modal from './Modal';
 import './Card.css';
 
 function Card(props) {
-  const { data } = props;
+  const { data, small } = props;
   const { name, icon, color } = data;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,18 +18,34 @@ function Card(props) {
       return null;
     };
 
-    const removeDuplicate = lastOpened.filter((item) => item.name !== name);
-    removeDuplicate.unshift(data);
+    const duplicate = lastOpened.find((item) => item.name === name);
 
-    if (removeDuplicate.length > 4) removeDuplicate.pop();
+    if (duplicate) {
+      const fromIndex = lastOpened.indexOf(duplicate);
+      const toIndex = 0;
 
-    localStorage.setItem('lastOpened', JSON.stringify(removeDuplicate));
+      lastOpened.splice(fromIndex, 1);
+      lastOpened.splice(toIndex, 0, data);
+
+      localStorage.setItem('lastOpened', JSON.stringify(lastOpened))
+      setIsOpen(true);
+      return null;
+    }
+
+    lastOpened.unshift(data);
+
+    if (lastOpened.length > 3) lastOpened.pop();
+
+    localStorage.setItem('lastOpened', JSON.stringify(lastOpened));
     setIsOpen(true);
   }
 
   return (
     <>
-      <div className="card-app" onClick={ openModal }>
+      <div
+        className={ `card-app ${small && 'small'}` }
+        onClick={ openModal }
+      >
 
         <p>{ name }</p>
 
