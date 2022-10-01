@@ -20,17 +20,7 @@ function Card(props) {
 
     const duplicate = lastOpened.find((item) => item.name === name);
 
-    if (duplicate) {
-      const fromIndex = lastOpened.indexOf(duplicate);
-      const toIndex = 0;
-
-      lastOpened.splice(fromIndex, 1);
-      lastOpened.splice(toIndex, 0, data);
-
-      localStorage.setItem('lastOpened', JSON.stringify(lastOpened))
-      setIsOpen(true);
-      return null;
-    }
+    if (duplicate) lastOpened.splice(lastOpened.indexOf(duplicate), 1);
 
     lastOpened.unshift(data);
 
