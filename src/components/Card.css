@@ -13,7 +13,6 @@
 .card-app:hover {
   background-color: rgba(225, 225, 225, 0.842);
   border-radius: 1.8rem;
-  /* min-height: 100px; */
 }
 
 .card-app p {

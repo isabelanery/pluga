@@ -49,6 +49,14 @@
   justify-content: center;
 }
 
+.modal-content p {
+  margin-bottom: 1rem;
+}
+
+.modal-content a {
+  text-decoration: none;
+}
+
 .details {
   display: flex;
   flex-direction: column;
