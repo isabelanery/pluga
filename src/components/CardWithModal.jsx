@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import ToolCard from './ToolCard';
 
@@ -12,10 +13,10 @@ export default function CardWithModal(props) {
     const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
 
     if (!lastOpened) {
-      localStorage.setItem('lastOpened', JSON.stringify([data]))
+      localStorage.setItem('lastOpened', JSON.stringify([data]));
       setIsOpen(true);
       return null;
-    };
+    }
 
     const duplicate = lastOpened.find((item) => item.name === data.name);
 
@@ -26,18 +27,23 @@ export default function CardWithModal(props) {
     if (lastOpened.length > 3) lastOpened.pop();
 
     localStorage.setItem('lastOpened', JSON.stringify(lastOpened));
-  }
+    return null;
+  };
 
   const openModal = () => {
     listLastOpenedTools();
     setIsOpen(true);
-  }
+  };
 
   return (
     <>
-      <ToolCard data={ data } showName openModal={ openModal } />
+      <ToolCard data={data} showName openModal={openModal} />
 
-      <Modal data={ data } isOpen={ isOpen } closeModal={ closeModal }  />
+      <Modal data={data} isOpen={isOpen} closeModal={closeModal} />
     </>
   );
 }
+
+CardWithModal.propTypes = {
+  data: PropTypes.objectOf(PropTypes.string),
+}.isRequired;

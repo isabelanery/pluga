@@ -11,12 +11,11 @@ export default function ToolsList() {
   const getList = async () => {
     const { data } = await api();
     setList(data);
-  }
+  };
 
   // reference https://stackoverflow.com/questions/42761068/paginate-javascript-array
-  const paginate = (array, pageSize, pageNumber) => {
-    return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
-  };
+  const paginate = (array, pageSize, pageNum) => array
+    .slice((pageNum - 1) * pageSize, pageNum * pageSize);
 
   const nextPage = () => {
     const loopPages = pageNumber === (list.length / toolsByPage) ? 1 : pageNumber + 1;
@@ -28,7 +27,7 @@ export default function ToolsList() {
     setPageNumber(loopPages);
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     getList();
   }, []);
 
@@ -38,8 +37,8 @@ export default function ToolsList() {
         {
           list.length > 0
             && paginate(list, toolsByPage, pageNumber)
-              .map((tool, i) => (
-                <CardWithModal data={ tool } key={ `tool-card-${i}` } />
+              .map((tool) => (
+                <CardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
               ))
         }
       </div>
@@ -47,7 +46,7 @@ export default function ToolsList() {
       <button
         type="button"
         className="btn"
-        onClick={ previousPage }
+        onClick={previousPage}
       >
         { '<' }
       </button>
@@ -55,7 +54,7 @@ export default function ToolsList() {
       <button
         type="button"
         className="btn"
-        onClick={ nextPage }
+        onClick={nextPage}
       >
         { '>' }
       </button>

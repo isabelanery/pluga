@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ToolCard from './ToolCard';
 import './LastOpened.css';
 
@@ -16,10 +16,10 @@ export default function LastOpened() {
       <div className="last-opened">
         {
           list.map((app, index) => (
-            <ToolCard small data={ app } key={ `last-opened-${index + 1}` }/>
+            <ToolCard small data={app} key={`last-opened-${index + 1}`} />
           ))
         }
       </div>
     </div>
-  )
+  );
 }
