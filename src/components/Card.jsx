@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 import './Card.css';
+import ToolCard from './ToolCard';
 
 function Card(props) {
-  const { data, small } = props;
-  const { name, icon, color } = data;
+  const { data } = props;
+  const { name } = data;
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -32,16 +33,7 @@ function Card(props) {
 
   return (
     <>
-      <div
-        className={ `card-app ${small && 'small'}` }
-        onClick={ openModal }
-      >
-
-        <p>{ name }</p>
-
-        <img src={ icon } alt={ name } style={ { "backgroundColor": color } } />
-
-      </div>
+      <ToolCard data={ data } showName openModal={ openModal } />
 
       <Modal data={ data } isOpen={ isOpen } closeModal={ closeModal }  />
     </>
