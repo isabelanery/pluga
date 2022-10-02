@@ -1,18 +1,9 @@
-import { useEffect, useState } from 'react';
-import './Modal.css';
+import LastOpened from './LastOpened';
 import ToolCard from './ToolCard';
+import './Modal.css';
 
 export default function Modal(props) {
-  const { data, isOpen, closeModal } = props;
-  const { link } = data;
-
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
-    setList(lastOpened);
-  }, [isOpen]);
-
+  const { data: { link }, data, isOpen, closeModal } = props;
 
   return (
     <div className={ `modal-container ${ isOpen ? 'open' : 'closed' }`} >
@@ -25,20 +16,10 @@ export default function Modal(props) {
             <a href={ link } target="_blank" rel="noopener noreferrer">{ link }</a>
           </div>
 
-          { isOpen && <ToolCard showName data={ data } />}
+          <ToolCard showName data={ data } />
         </div>
 
-        <div className="last-opened-container">
-          Últimas ferramentas visualizadas
-          <div className="last-opened">
-            {
-              isOpen
-                && list.map((app, index) => (
-                  <ToolCard small data={ app } key={ `last-opened-${index + 1}` }/>
-                ))
-            }
-          </div>
-        </div>
+        <LastOpened />
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './ToolCard.css';
 
 function ToolCard(props) {
   const { data, small, showName, openModal } = props;

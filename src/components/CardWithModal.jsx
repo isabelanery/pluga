@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
-import './Card.css';
 import ToolCard from './ToolCard';
 
-function Card(props) {
+export default function CardWithModal(props) {
   const { data } = props;
-  const { name } = data;
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
 
-  const openModal = () => {
+  const listLastOpenedTools = () => {
     const lastOpened = JSON.parse(localStorage.getItem('lastOpened'));
 
     if (!lastOpened) {
@@ -19,7 +17,7 @@ function Card(props) {
       return null;
     };
 
-    const duplicate = lastOpened.find((item) => item.name === name);
+    const duplicate = lastOpened.find((item) => item.name === data.name);
 
     if (duplicate) lastOpened.splice(lastOpened.indexOf(duplicate), 1);
 
@@ -28,6 +26,10 @@ function Card(props) {
     if (lastOpened.length > 3) lastOpened.pop();
 
     localStorage.setItem('lastOpened', JSON.stringify(lastOpened));
+  }
+
+  const openModal = () => {
+    listLastOpenedTools();
     setIsOpen(true);
   }
 
@@ -39,5 +41,3 @@ function Card(props) {
     </>
   );
 }
-
-export default Card;

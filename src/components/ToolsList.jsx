@@ -1,24 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Card from './Card';
-import './List.css';
+import CardWithModal from './CardWithModal';
+import './ToolsList.css';
 
-function List() {
-  const [apps, setApps] = useState([]);
+export default function ToolsList() {
+  const [list, setList] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const toolsByPage = 11;
 
   const getList = async () => {
     const { data } = await axios.get('https://pluga.co/ferramentas_search.json');
-    setApps(data);
+    setList(data);
   }
 
+  // reference https://stackoverflow.com/questions/42761068/paginate-javascript-array
   const paginate = (array, pageSize, pageNumber) => {
     return array.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   };
 
   const nextPage = () => {
-    const page = pageNumber === 6 ? 1 : pageNumber + 1;
-    setPageNumber(page);
+    const loopPages = pageNumber === (list.length / toolsByPage) ? 1 : pageNumber + 1;
+    setPageNumber(loopPages);
   };
 
   useEffect(() =>{
@@ -29,9 +31,11 @@ function List() {
     <div className="list-container">
       <div className="list-wrapper">
         {
-          apps.length > 0
-            && paginate(apps, 11, pageNumber)
-              .map((app, i) => <Card data={ app } key={ `app-card-${i}` } /> )
+          list.length > 0
+            && paginate(list, toolsByPage, pageNumber)
+              .map((tool, i) => (
+                <CardWithModal data={ tool } key={ `tool-card-${i}` } />
+              ))
         }
       </div>
 
@@ -45,5 +49,3 @@ function List() {
     </div>
   );
 }
-
-export default List;
