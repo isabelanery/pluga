@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { api } from '../services/api';
 import CardWithModal from './CardWithModal';
 import './ToolsList.css';
 
@@ -9,7 +9,7 @@ export default function ToolsList() {
   const toolsByPage = 11;
 
   const getList = async () => {
-    const { data } = await axios.get('https://pluga.co/ferramentas_search.json');
+    const { data } = await api();
     setList(data);
   }
 
