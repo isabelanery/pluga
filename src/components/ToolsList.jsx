@@ -23,6 +23,12 @@ export default function ToolsList() {
     setPageNumber(loopPages);
   };
 
+  const previousPage = () => {
+    const loopPages = pageNumber === 1 ? (list.length / toolsByPage) : pageNumber - 1;
+    setPageNumber(loopPages);
+  };
+
+
   useEffect(() =>{
     getList();
   }, []);
@@ -38,6 +44,14 @@ export default function ToolsList() {
               ))
         }
       </div>
+
+      <button
+        type="button"
+        className="btn"
+        onClick={ previousPage }
+      >
+        { '<' }
+      </button>
 
       <button
         type="button"
