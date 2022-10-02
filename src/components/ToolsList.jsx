@@ -28,7 +28,6 @@ export default function ToolsList() {
     setPageNumber(loopPages);
   };
 
-
   useEffect(() =>{
     getList();
   }, []);
