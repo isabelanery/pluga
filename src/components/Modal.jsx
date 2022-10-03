@@ -31,7 +31,7 @@ export default function Modal(props) {
           <ToolCard showName data={data} />
         </div>
 
-        <LastOpened />
+        <LastOpened isOpen={isOpen} />
       </div>
     </div>
   );

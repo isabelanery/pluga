@@ -20,11 +20,11 @@ export default function CardWithModal(props) {
 
     const duplicate = lastOpened.find((item) => item.name === data.name);
 
-    if (duplicate) lastOpened.splice(lastOpened.indexOf(duplicate), 1);
+    if (lastOpened.indexOf(duplicate) === 0) lastOpened.splice(lastOpened.indexOf(duplicate), 1);
 
     lastOpened.unshift(data);
 
-    if (lastOpened.length > 3) lastOpened.pop();
+    if (lastOpened.length > 4) lastOpened.pop();
 
     localStorage.setItem('lastOpened', JSON.stringify(lastOpened));
     return null;
