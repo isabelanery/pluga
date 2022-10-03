@@ -10,7 +10,7 @@ export default function ListAllTools() {
   const toolsByPage = 11;
 
   const getList = async () => {
-    const { data } = await api();
+    const { data } = await api.getTools();
     setList(data);
   };
 
