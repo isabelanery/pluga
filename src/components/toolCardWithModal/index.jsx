@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Modal from './Modal';
-import ToolCard from './ToolCard';
+import Modal from '../modal';
+import ToolCard from '../toolCard';
 
 export default function CardWithModal(props) {
   const { data } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LastOpened from './LastOpened';
-import ToolCard from './ToolCard';
+import LastOpened from '../lastOpenedTools';
+import ToolCard from '../toolCard';
 import './Modal.css';
 
 export default function Modal(props) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CardWithModal from './CardWithModal';
+import CardWithModal from '../toolCardWithModal';
 import api from '../services/api';
 import './ToolsList.css';
 

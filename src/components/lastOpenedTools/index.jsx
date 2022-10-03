@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ToolCard from './ToolCard';
+import ToolCard from '../toolCard';
 import './LastOpened.css';
 
 export default function LastOpened(props) {
