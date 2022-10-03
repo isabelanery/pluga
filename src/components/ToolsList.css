@@ -22,3 +22,11 @@
   border-color: rgb(39, 170, 225);
   color: white;
 }
+
+.search {
+  border: 1px solid;
+  border-color: rgb(39, 170, 225);
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  margin-top: 1.5rem;
+}
