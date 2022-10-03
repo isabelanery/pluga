@@ -1,11 +1,11 @@
 import React from 'react';
-import ToolsList from './components/ToolsList';
+import ListAllTools from './components/ListAllTools';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <ToolsList />
+    <div className="app">
+      <ListAllTools />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import CardWithModal from '../toolCardWithModal';
-import api from '../services/api';
-import './ToolsList.css';
+import CardWithModal from '../ToolCardWithModal';
+import api from '../../services/api';
+import './ListAllTools.css';
 
-export default function ToolsList() {
+export default function ListAllTools() {
   const [list, setList] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [search, setSearch] = useState('');

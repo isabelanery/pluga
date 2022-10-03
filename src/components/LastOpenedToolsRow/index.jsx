@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ToolCard from '../toolCard';
-import './LastOpened.css';
+import ToolCard from '../ToolCard';
+import './LastOpenedToolsRow.css';
 
-export default function LastOpened(props) {
+export default function LastOpenedToolsRow(props) {
   const { isOpen } = props;
   const [list, setList] = useState([]);
 
@@ -27,6 +27,6 @@ export default function LastOpened(props) {
   );
 }
 
-LastOpened.propTypes = {
+LastOpenedToolsRow.propTypes = {
   isOpen: PropTypes.boolean,
 }.isRequired;

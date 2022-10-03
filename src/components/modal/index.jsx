@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LastOpened from '../lastOpenedTools';
-import ToolCard from '../toolCard';
+import LastOpenedToolsRow from '../LastOpenedToolsRow';
+import ToolCard from '../ToolCard';
 import './Modal.css';
 
 export default function Modal(props) {
@@ -12,15 +12,13 @@ export default function Modal(props) {
   return (
     <div className={`modal-container ${isOpen ? 'open' : 'closed'}`}>
       <div className="modal-wrapper">
-        <span
+        <button
+          type="button"
           className="close"
           onClick={closeModal}
-          role="button"
-          onKeyPress={closeModal}
-          tabIndex={0}
         >
           &times;
-        </span>
+        </button>
 
         <div className="modal-content">
           <div className="details">
@@ -31,7 +29,7 @@ export default function Modal(props) {
           <ToolCard showName data={data} />
         </div>
 
-        <LastOpened isOpen={isOpen} />
+        <LastOpenedToolsRow isOpen={isOpen} />
       </div>
     </div>
   );
