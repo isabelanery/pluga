@@ -6,17 +6,17 @@ import storage from '../../services/storage';
 
 export default function LastOpenedToolsRow(props) {
   const { isOpen } = props;
-  const [list, setList] = useState([]);
+  const [toolsList, setToolsList] = useState([]);
 
   useEffect(() => {
     const lastOpenedTools = storage.getLastOpenedTools();
-    setList(lastOpenedTools);
+    setToolsList(lastOpenedTools);
   }, [isOpen]);
 
   return (
     <div className="last-opened-container">
       {
-      list.length > 0
+      toolsList.length > 0
         && (
           <>
             <p>
@@ -24,8 +24,8 @@ export default function LastOpenedToolsRow(props) {
             </p>
             <div className="last-opened">
               {
-              list.map((app, index) => (
-                <ToolCard small data={app} key={`last-opened-${index + 1}`} />
+              toolsList.map((app) => (
+                <ToolCard small data={app} key={`last-opened-${app.app_id}`} />
               ))
               }
             </div>
