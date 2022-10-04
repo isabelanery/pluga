@@ -1,27 +1,39 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import axios from 'axios';
 import App from '../App';
 import mockApi from './mocks/api';
+import api from '../services/api';
+import ListAllTools from '../components/ListAllTools';
 
 describe('The page is rendered correctly', () => {
   beforeEach(() => {
-    jest.mock("axios");
-    axios.get.mockImplementation(() => Promise.resolve({ data: mockApi }));
+    api.getTools = jest.fn().mockResolvedValue({ data: mockApi });
   });
 
   afterEach(() => jest.clearAllMocks());
 
-  it('has a button to switch pages', () => {
+  it('has a search bar', () => {
     render(<App />);
-    const toolCards = screen.getByRole("button");
-    expect(toolCards).toBeInTheDocument();
+    const searchBar = screen.getByRole("textbox");
+    expect(searchBar).toBeInTheDocument();
   });
 
-  it('list the tools available in the API', () => {
+  it('has two buttons to switch pages', () => {
     render(<App />);
-    const toolCards = screen.getByRole("img");
-    expect(toolCards).toBeInTheDocument();
+    const changePages = screen.getAllByRole("button");
+    expect(changePages[0]).toBeInTheDocument();
+    expect(changePages[1]).toBeInTheDocument();
   });
+
+  it('the API should be called', () => {
+    render(<App />);
+    expect(api.getTools).toBeCalled();
+  });
+
+  it('renders 11 apps/page', async () => {
+    const {getAllByRole} = render(<App />);
+    await waitFor(() => expect(getAllByRole('img')[0]).toBeInTheDocument())
+    await waitFor(() => expect(getAllByRole('img')[10]).toBeInTheDocument())
+  })
 });
