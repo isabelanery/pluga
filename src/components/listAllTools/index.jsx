@@ -23,7 +23,7 @@ export default function ListAllTools() {
   const paginate = (array, pageSize, pageNum) => array
     .slice((pageNum - 1) * pageSize, pageNum * pageSize);
 
-  const getLastPageNumber = (array) => Math.round(array.length / TOOLS_BY_PAGE);
+  const getLastPageNumber = (array) => Math.ceil(array.length / TOOLS_BY_PAGE);
 
   const nextPage = () => {
     const lastPage = getLastPageNumber(toolListWithSearch);
@@ -56,8 +56,8 @@ export default function ListAllTools() {
   }, []);
 
   useEffect(() => {
-    const shouldChangePage = paginate(toolListWithSearch, TOOLS_BY_PAGE, pageNumber).length < 11;
-    setIsBtnDisabled(shouldChangePage);
+    const shouldChangePages = getLastPageNumber(toolListWithSearch) === 1;
+    setIsBtnDisabled(shouldChangePages);
   }, [search]);
 
   return (
