@@ -6,6 +6,12 @@ import './ListAllTools.css';
 
 const TOOLS_BY_PAGE = 11;
 
+// reference https://stackoverflow.com/questions/42761068/paginate-javascript-array
+const paginate = (array, pageSize, pageNum) => array
+  .slice((pageNum - 1) * pageSize, pageNum * pageSize);
+
+const getLastPageNumber = (array) => Math.ceil(array.length / TOOLS_BY_PAGE);
+
 export default function ListAllTools() {
   const [originalToolsList, setOriginalToolsList] = useState([]);
   const [toolListWithSearch, setSearchToolsList] = useState([]);
@@ -18,12 +24,6 @@ export default function ListAllTools() {
     setOriginalToolsList(data);
     setSearchToolsList(data);
   };
-
-  // reference https://stackoverflow.com/questions/42761068/paginate-javascript-array
-  const paginate = (array, pageSize, pageNum) => array
-    .slice((pageNum - 1) * pageSize, pageNum * pageSize);
-
-  const getLastPageNumber = (array) => Math.ceil(array.length / TOOLS_BY_PAGE);
 
   const nextPage = () => {
     const lastPage = getLastPageNumber(toolListWithSearch);
