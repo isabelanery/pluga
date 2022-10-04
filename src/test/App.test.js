@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import App from '../App';
 import mockApi from './mocks/api';
 import api from '../services/api';
-import ListAllTools from '../components/ListAllTools';
 
 describe('The page is rendered correctly', () => {
   beforeEach(() => {
@@ -33,7 +32,7 @@ describe('The page is rendered correctly', () => {
 
   it('renders 11 apps/page', async () => {
     const {getAllByRole} = render(<App />);
-    await waitFor(() => expect(getAllByRole('img')[0]).toBeInTheDocument())
-    await waitFor(() => expect(getAllByRole('img')[10]).toBeInTheDocument())
-  })
+    await waitFor(() => expect(getAllByRole('img')[0]).toBeInTheDocument());
+    await waitFor(() => expect(getAllByRole('img')[10]).toBeInTheDocument());
+  });
 });
