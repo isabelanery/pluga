@@ -23,6 +23,12 @@
   color: white;
 }
 
+.btn:disabled {
+  background-color: rgba(156, 165, 169, 0.428);
+  border-color: rgba(156, 165, 169, 0.428);
+  color: white;
+}
+
 .search {
   border: 1px solid;
   border-color: rgb(39, 170, 225);

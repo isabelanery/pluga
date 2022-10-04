@@ -1,45 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import CardWithModal from '../ToolCardWithModal';
+import Loading from '../Loading';
 import api from '../../services/api';
 import './ListAllTools.css';
 
+const TOOLS_BY_PAGE = 11;
+
 export default function ListAllTools() {
-  const [list, setList] = useState([]);
+  const [originalToolsList, setOriginalToolsList] = useState([]);
+  const [toolListWithSearch, setSearchToolsList] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [search, setSearch] = useState('');
-  const toolsByPage = 11;
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
-  const getList = async () => {
+  const getToolsList = async () => {
     const { data } = await api.getTools();
-    setList(data);
+    setOriginalToolsList(data);
+    setSearchToolsList(data);
   };
 
   // reference https://stackoverflow.com/questions/42761068/paginate-javascript-array
   const paginate = (array, pageSize, pageNum) => array
     .slice((pageNum - 1) * pageSize, pageNum * pageSize);
 
+  const getLastPageNumber = (array) => Math.round(array.length / TOOLS_BY_PAGE);
+
   const nextPage = () => {
-    const loopPages = pageNumber === (list.length / toolsByPage) ? 1 : pageNumber + 1;
+    const lastPage = getLastPageNumber(toolListWithSearch);
+    const loopPages = pageNumber === lastPage ? 1 : pageNumber + 1;
     setPageNumber(loopPages);
   };
 
   const previousPage = () => {
-    const loopPages = pageNumber === 1 ? (list.length / toolsByPage) : pageNumber - 1;
+    const lastPage = getLastPageNumber(toolListWithSearch);
+    const loopPages = pageNumber === 1 ? lastPage : pageNumber - 1;
     setPageNumber(loopPages);
+  };
+
+  const getSearchResults = (value) => {
+    const toolsFound = originalToolsList
+      .filter((item) => item.name.toLowerCase().includes(value));
+
+    setSearch(value);
+    setSearchToolsList(toolsFound);
+    setPageNumber(1);
   };
 
   const handleChange = ({ target }) => {
     const { value } = target;
-
-    setSearch(value.toLowerCase());
+    getSearchResults(value.toLowerCase());
   };
 
   useEffect(() => {
-    getList();
+    getToolsList();
   }, []);
 
+  useEffect(() => {
+    const shouldChangePage = paginate(toolListWithSearch, TOOLS_BY_PAGE, pageNumber).length < 11;
+    setIsBtnDisabled(shouldChangePage);
+  }, [search]);
+
   return (
-    // change 4 loading conditional render
     <div className="list-container">
       <input
         type="text"
@@ -51,12 +72,12 @@ export default function ListAllTools() {
 
       <div className="list-wrapper">
         {
-          list.length > 0
-            && paginate(list, toolsByPage, pageNumber)
-              .filter((item) => item.name.toLowerCase().includes(search))
-              .map((tool) => (
-                <CardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
-              ))
+        originalToolsList.length > 0
+          ? paginate(toolListWithSearch, TOOLS_BY_PAGE, pageNumber)
+            .map((tool) => (
+              <CardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
+            ))
+          : <Loading />
         }
       </div>
 
@@ -64,6 +85,7 @@ export default function ListAllTools() {
         type="button"
         className="btn"
         onClick={previousPage}
+        disabled={isBtnDisabled}
       >
         { '<' }
       </button>
@@ -72,6 +94,7 @@ export default function ListAllTools() {
         type="button"
         className="btn"
         onClick={nextPage}
+        disabled={isBtnDisabled}
       >
         { '>' }
       </button>
