@@ -1,0 +1,45 @@
+.card-app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 1rem;
+  margin-top: 0;
+  min-height: 100%;
+  padding: 1.5rem;
+  width: 160px;
+  opacity: 0.7;
+}
+
+.card-app:hover {
+  background-color: rgba(255, 255, 255, 0.888);
+  border-radius: 1.8rem;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.card-app p {
+  margin-bottom: 1rem;
+}
+
+.card-app img {
+  border-radius: 1.8rem;
+  max-width: 100px;
+  padding: 1rem;
+}
+
+.small {
+  margin: 1rem;
+  padding: 0.8rem;
+  min-height: 100px;
+  width: 100px;
+}
+
+.small img {
+  border-radius: 1.5rem;
+}
+
+.small p {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}

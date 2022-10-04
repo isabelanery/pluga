@@ -1,0 +1,39 @@
+.list-wrapper {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 76vh;
+  padding: 1.5rem;
+}
+
+.btn {
+  background-color: white;
+  border-color: white;
+  border-radius: 0.5rem;
+  color: rgb(39, 170, 225);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn:hover {
+  background-color: rgb(39, 170, 225);
+  border-color: rgb(39, 170, 225);
+  color: white;
+}
+
+.btn:disabled {
+  background-color: rgba(156, 165, 169, 0.428);
+  border-color: rgba(156, 165, 169, 0.428);
+  color: white;
+}
+
+.search {
+  border: 1px solid;
+  border-color: rgb(39, 170, 225);
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  margin-top: 3rem;
+}
