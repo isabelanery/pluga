@@ -17,8 +17,6 @@ const addToLastOpenedTools = (data) => setLocalStorage(LAST_OPENED_TOOLS, data);
 const updateLastOpenedTools = (data) => {
   const lastOpenedList = getLastOpenedTools();
 
-  if (lastOpenedList.length <= 0) addToLastOpenedTools([data]);
-
   const duplicated = lastOpenedList.find((item) => item.name === data.name);
 
   if (duplicated) lastOpenedList.splice(lastOpenedList.indexOf(duplicated), 1);
