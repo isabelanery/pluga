@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CardWithModal from '../ToolCardWithModal';
+import ToolCardWithModal from '../ToolCardWithModal';
 import Loading from '../Loading';
 import api from '../../services/api';
 import './ListAllTools.css';
@@ -75,7 +75,7 @@ export default function ListAllTools() {
         originalToolsList.length > 0
           ? paginate(toolListWithSearch, TOOLS_BY_PAGE, pageNumber)
             .map((tool) => (
-              <CardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
+              <ToolCardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
             ))
           : <Loading />
         }
