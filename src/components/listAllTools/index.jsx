@@ -46,7 +46,7 @@ export default function ListAllTools() {
     setPageNumber(1);
   };
 
-  const handleChange = ({ target }) => {
+  const handleSearchChange = ({ target }) => {
     const { value } = target;
     getSearchResults(value.toLowerCase());
   };
@@ -66,7 +66,7 @@ export default function ListAllTools() {
         type="text"
         className="search"
         value={search}
-        onChange={handleChange}
+        onChange={handleSearchChange}
         placeholder="Procurar por nome"
       />
 
