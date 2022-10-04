@@ -19,7 +19,7 @@ export default function ToolCardWithModal(props) {
 
   return (
     <>
-      <ToolCard data={data} showName openModal={openModal} />
+      <ToolCard data={data} shouldShowName openModal={openModal} />
 
       <Modal data={data} isOpen={isOpen} closeModal={closeModal} />
     </>

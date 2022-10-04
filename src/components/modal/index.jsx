@@ -26,7 +26,7 @@ export default function Modal(props) {
             <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
           </div>
 
-          <ToolCard showName data={data} />
+          <ToolCard shouldShowName data={data} />
         </div>
 
         <LastOpenedToolsRow isOpen={isOpen} />

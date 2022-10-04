@@ -4,7 +4,7 @@ import './ToolCard.css';
 
 export default function ToolCard(props) {
   const {
-    data, small, showName, openModal,
+    data, small, shouldShowName, openModal,
   } = props;
   const { name, icon, color } = data;
 
@@ -16,7 +16,7 @@ export default function ToolCard(props) {
       onKeyPress={openModal}
       tabIndex={0}
     >
-      { showName && <p>{ name }</p> }
+      { shouldShowName && <p>{ name }</p> }
       <img src={icon} alt={name} style={{ backgroundColor: color }} />
     </div>
   );
