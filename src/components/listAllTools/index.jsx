@@ -53,10 +53,7 @@ export default function ListAllTools() {
           : <Loading />
         }
 
-        {
-          toolListWithSearch.length <= 0
-            && <p className="not-found"> Not Found </p>
-        }
+        { toolListWithSearch.length <= 0 && <p className="not-found"> Not Found </p> }
       </div>
 
       <PaginateList toolList={toolListWithSearch} />
