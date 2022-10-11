@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import PaginateList from '../PaginateList';
 import ToolCardWithModal from '../ToolCardWithModal';
 import Loading from '../Loading';
 import api from '../../services/api';
-import { paginate, TOOLS_BY_PAGE } from '../../services/pagination';
 import { AppContext } from '../../context/Provider';
-import PaginateList from '../PaginateList';
+import { paginate, TOOLS_BY_PAGE } from '../../services/pagination';
 import './ListAllTools.css';
 
 export default function ListAllTools() {
@@ -48,12 +48,13 @@ export default function ListAllTools() {
         originalToolsList.length > 0
           ? paginate(toolListWithSearch, TOOLS_BY_PAGE, pageNumber)
             .map((tool) => (
-              <ToolCardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
+              <ToolCardWithModal shouldShowName data={tool} key={`tool-card-${tool.app_id}`} />
             ))
           : <Loading />
         }
 
-        { toolListWithSearch.length <= 0 && <p className="not-found"> Not Found </p> }
+        { (toolListWithSearch.length <= 0 && originalToolsList.length > 0)
+          && <p className="not-found"> Not Found </p> }
       </div>
 
       <PaginateList toolList={toolListWithSearch} />

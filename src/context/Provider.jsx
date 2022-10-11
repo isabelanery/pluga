@@ -6,8 +6,17 @@ export const AppContext = createContext();
 function Provider(props) {
   const { children } = props;
   const [pageNumber, setPageNumber] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTool, setModalTool] = useState({});
 
-  const contextValue = useMemo(() => ({ pageNumber, setPageNumber }), [pageNumber]);
+  const contextValue = useMemo(() => ({
+    pageNumber,
+    setPageNumber,
+    isModalOpen,
+    setIsModalOpen,
+    modalTool,
+    setModalTool,
+  }), [pageNumber, isModalOpen, modalTool]);
 
   return (
     <AppContext.Provider value={contextValue}>

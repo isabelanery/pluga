@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import LastOpenedToolsRow from '../LastOpenedToolsRow';
-import ToolCard from '../ToolCard';
+import { AppContext } from '../../context/Provider';
 import './Modal.css';
+import ToolCardWithModal from '../ToolCardWithModal';
 
-export default function Modal(props) {
-  const {
-    data: { link }, data, isOpen, closeModal,
-  } = props;
+export default function Modal() {
+  const { isModalOpen: isOpen, setIsModalOpen, modalTool } = useContext(AppContext);
+  const { link } = modalTool;
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={`modal-container ${isOpen ? 'open' : 'closed'}`}>
@@ -26,7 +30,10 @@ export default function Modal(props) {
             <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
           </div>
 
-          <ToolCard shouldShowName data={data} />
+          <ToolCardWithModal
+            shouldShowName
+            data={modalTool}
+          />
         </div>
 
         <LastOpenedToolsRow isOpen={isOpen} />
