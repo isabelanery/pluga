@@ -2,17 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AppContext } from '../../context/Provider';
 import { getLastPageNumber } from '../../services/pagination';
+import './PaginateList.css';
 
 export default function PaginateList({ toolList }) {
   const { pageNumber, setPageNumber } = useContext(AppContext);
   const [lastPageNumber, setLastPageNumber] = useState();
-  const [isPaginateBtnDisabled, setIsPaginateBtnDisabled] = useState(false);
-
-  const verifyPaginateBtns = (toolsArray) => {
-    setLastPageNumber(getLastPageNumber(toolsArray));
-    const shouldAbleBtns = lastPageNumber <= 1;
-    setIsPaginateBtnDisabled(shouldAbleBtns);
-  };
 
   const nextPage = () => {
     const loopPages = pageNumber === lastPageNumber ? 1 : pageNumber + 1;
@@ -25,29 +19,29 @@ export default function PaginateList({ toolList }) {
   };
 
   useEffect(() => {
-    verifyPaginateBtns(toolList);
+    setLastPageNumber(getLastPageNumber(toolList));
   }, [toolList]);
 
   return (
-    <>
+    <div className="paginate-container">
       <button
         type="button"
         className="btn"
         onClick={previousPage}
-        disabled={isPaginateBtnDisabled}
+        disabled={lastPageNumber <= 1}
       >
         { '<' }
       </button>
-      <p>{ pageNumber }</p>
+      <p className="page-number">{ pageNumber }</p>
       <button
         type="button"
         className="btn"
         onClick={nextPage}
-        disabled={isPaginateBtnDisabled}
+        disabled={lastPageNumber <= 1}
       >
         { '>' }
       </button>
-    </>
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ export default function ListAllTools() {
   const [originalToolsList, setOriginalToolsList] = useState([]);
   const [toolListWithSearch, setSearchToolsList] = useState([]);
   const [search, setSearch] = useState('');
-  const { pageNumber } = useContext(AppContext);
+  const { pageNumber, setPageNumber } = useContext(AppContext);
 
   const getToolsList = async () => {
     const { data } = await api.getTools();
@@ -26,6 +26,7 @@ export default function ListAllTools() {
 
     setSearch(normalizedValue);
     setSearchToolsList(toolsFound);
+    setPageNumber(1);
   };
 
   useEffect(() => {
@@ -50,6 +51,11 @@ export default function ListAllTools() {
               <ToolCardWithModal data={tool} key={`tool-card-${tool.app_id}`} />
             ))
           : <Loading />
+        }
+
+        {
+          toolListWithSearch.length <= 0
+            && <p className="not-found"> Not Found </p>
         }
       </div>
 
