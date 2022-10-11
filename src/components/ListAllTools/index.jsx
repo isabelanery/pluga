@@ -14,7 +14,7 @@ export default function ListAllTools() {
   const { pageNumber, setPageNumber } = useContext(AppContext);
 
   const getToolsList = async () => {
-    const { data } = await api.getTools();
+    const data = await api.getTools();
     setOriginalToolsList(data);
     setSearchToolsList(data);
   };
