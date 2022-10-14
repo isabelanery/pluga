@@ -1,31 +1,17 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Modal from '../Modal';
+import React, { useContext } from 'react';
 import ToolCard from '../ToolCard';
-import storage from '../../services/storage';
+import { AppContext } from '../../context/Provider';
 
 export default function ToolCardWithModal(props) {
-  const { data } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const { data, shouldShowName, small } = props;
+  const { setIsModalOpen, setModalTool } = useContext(AppContext);
 
   const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    storage.updateLastOpenedTools(data);
-    setIsOpen(false);
+    setModalTool(data);
+    setIsModalOpen(true);
   };
 
   return (
-    <>
-      <ToolCard data={data} shouldShowName openModal={openModal} />
-
-      <Modal data={data} isOpen={isOpen} closeModal={closeModal} />
-    </>
+    <ToolCard data={data} shouldShowName={shouldShowName} small={small} onClick={openModal} />
   );
 }
-
-ToolCardWithModal.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string),
-}.isRequired;

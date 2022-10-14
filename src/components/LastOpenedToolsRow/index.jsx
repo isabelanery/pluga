@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import ToolCard from '../ToolCard';
-import './LastOpenedToolsRow.css';
+import React, { useContext, useEffect, useState } from 'react';
 import storage from '../../services/storage';
+import { AppContext } from '../../context/Provider';
+import ToolCardWithModal from '../ToolCardWithModal';
+import './LastOpenedToolsRow.css';
 
-export default function LastOpenedToolsRow(props) {
-  const { isOpen } = props;
+export default function LastOpenedToolsRow() {
+  const { modalTool, isModalOpen } = useContext(AppContext);
   const [toolsList, setToolsList] = useState([]);
 
   useEffect(() => {
     const lastOpenedTools = storage.getLastOpenedTools();
+
+    if (modalTool.name) storage.updateLastOpenedTools(modalTool);
+
     setToolsList(lastOpenedTools);
-  }, [isOpen]);
+  }, [modalTool, isModalOpen]);
 
   return (
     <div className="last-opened-container">
@@ -25,7 +28,7 @@ export default function LastOpenedToolsRow(props) {
             <div className="last-opened">
               {
               toolsList.map((app) => (
-                <ToolCard small data={app} key={`last-opened-${app.app_id}`} />
+                <ToolCardWithModal small data={app} key={`last-opened-${app.app_id}`} />
               ))
               }
             </div>
@@ -35,7 +38,3 @@ export default function LastOpenedToolsRow(props) {
     </div>
   );
 }
-
-LastOpenedToolsRow.propTypes = {
-  isOpen: PropTypes.boolean,
-}.isRequired;

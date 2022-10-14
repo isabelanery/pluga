@@ -9,8 +9,8 @@ const fetchData = async (path) => {
 };
 
 const getTools = async () => {
-  const response = await fetchData(GET_TOOLS_PATH);
-  return response || [];
+  const { data } = await fetchData(GET_TOOLS_PATH);
+  return data || [];
 };
 
 const api = {

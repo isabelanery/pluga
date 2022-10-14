@@ -1,0 +1,33 @@
+.paginate-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.page-number {
+  color: rgb(31, 139, 185);
+  padding: 0.8rem 1rem;
+}
+
+.btn {
+  background-color: white;
+  border-color: white;
+  border-radius: 0.5rem;
+  color: rgb(39, 170, 225);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.8rem 1rem;
+  /* margin-bottom: 2rem; */
+}
+
+.btn:hover {
+  background-color: rgb(39, 170, 225);
+  border-color: rgb(39, 170, 225);
+  color: white;
+}
+
+.btn:disabled {
+  background-color: rgba(156, 165, 169, 0.428);
+  border-color: rgba(156, 165, 169, 0.428);
+  color: white;
+}

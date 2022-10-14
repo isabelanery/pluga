@@ -1,13 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import LastOpenedToolsRow from '../LastOpenedToolsRow';
 import ToolCard from '../ToolCard';
+import { AppContext } from '../../context/Provider';
+import storage from '../../services/storage';
 import './Modal.css';
 
-export default function Modal(props) {
-  const {
-    data: { link }, data, isOpen, closeModal,
-  } = props;
+export default function Modal() {
+  const { isModalOpen: isOpen, setIsModalOpen, modalTool } = useContext(AppContext);
+  const { link } = modalTool;
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const updateLastOpenedList = () => {
+    if (modalTool.name) storage.updateLastOpenedTools(modalTool);
+  };
 
   return (
     <div className={`modal-container ${isOpen ? 'open' : 'closed'}`}>
@@ -26,7 +34,13 @@ export default function Modal(props) {
             <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
           </div>
 
-          <ToolCard shouldShowName data={data} />
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <ToolCard
+              shouldShowName
+              data={modalTool}
+              onClick={updateLastOpenedList}
+            />
+          </a>
         </div>
 
         <LastOpenedToolsRow isOpen={isOpen} />
@@ -34,7 +48,3 @@ export default function Modal(props) {
     </div>
   );
 }
-
-Modal.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string),
-}.isRequired;

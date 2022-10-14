@@ -34,6 +34,8 @@
   float: right;
   font-size: 24px;
   font-weight: bold;
+  border: none;
+  background-color: white;
 }
 
 .close:hover {
